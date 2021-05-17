@@ -1,8 +1,11 @@
 package pr2.org;
 
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
@@ -33,9 +36,7 @@ public class Graph<V> {
     }
 
     /******************************************************************
-    * Añade un arco entre los vértices ‘v1‘ y ‘v2‘ al grafo. En
-    * caso de que no exista alguno de los vértices, lo añade
-    * también.
+    * Añade un arco entre los vértices ‘v1‘ y ‘v2‘ al grafo. 
     *
     * @param v1 el origen del arco.
     * @param v2 el destino del arco.
@@ -105,29 +106,45 @@ public class Graph<V> {
    
     public List<V> onePath(V v1, V v2){
         Stack<V> abierta = new Stack<>();
-        List<V> traza = new ArrayList<>(); //Lista que devuelve el camino de mi grafo
+        Map<V, V> traza = new HashMap<>(); 
+        List<V> caminoGrafo = new ArrayList<>();
 
         abierta.push(v1);
-        traza.add(v1);
         boolean encontrado = false;
-        V v; // v es un vértice auxiliar
-
-        //Crear variable "visitado" para saber qué vértices he visitado o no
-
+        V verticeActual = null;
+        V verticeAnterior = null; 
+        traza.put(verticeActual, null);
         while(!abierta.isEmpty() && !encontrado){
-            v = abierta.pop();
-            if (!traza.contains(v)) traza.add(v);
-            else { traza.remove(traza.size() - 1);}
-            if(v == v2){ encontrado = true;}
-            if(!encontrado){
-                abierta.addAll(adjacencyList.get(v));
+            verticeActual = abierta.pop();
+            if(verticeAnterior != null && adjacencyList.get(verticeAnterior).contains(verticeActual)){
+                traza.put(verticeActual, verticeAnterior);
+            } else{
+                for(V predecesor : traza.keySet()){
+                    if(predecesor != null && adjacencyList.get(predecesor).contains(verticeActual)) {
+                        verticeAnterior = predecesor;
+                        traza.put(verticeActual, verticeAnterior);
+                    }
+                }
             }
+            if(verticeActual.equals(v2)){ encontrado = true;}
+            if(!encontrado){
+                for (V adjacentes : adjacencyList.get(verticeActual)) {
+                    if(!traza.containsKey(adjacentes)) {   
+                        abierta.push(adjacentes);
+                    }
+                }  
+            }
+            verticeAnterior = verticeActual;
         }
         if(encontrado){ 
-            return traza; // lista donde mi primer elemento es v1 y el último es v2
+            while (verticeActual != null){
+                caminoGrafo.add(verticeActual);
+                verticeActual = traza.get(verticeActual);
+            }
+            Collections.reverse(caminoGrafo);
+            return caminoGrafo; // lista donde mi primer elemento es v1 y el último es v2
         }else {
-            return null;
-        }
-        
+            return null; 
+        } 
     }
 }

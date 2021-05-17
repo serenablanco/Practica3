@@ -13,10 +13,12 @@ import org.junit.Test;
 public class GraphTest {
     
     private Graph<String> miGrafoDeStrings;
+    private Graph<Integer> g;
 
     @Before
     public void setup() {
         this.miGrafoDeStrings = new Graph<String>();
+        this.g = new Graph<Integer>();
     }
 
     @Test
@@ -117,6 +119,34 @@ public class GraphTest {
         this.miGrafoDeStrings.addEdge("v1", "v2"); 
         String actual = miGrafoDeStrings.toString();
         assertEquals( expectedString, actual);
+    }
+
+    @Test
+    public void onePathFindsAPath(){
+        System.out.println("\nTest onePathFindsAPath");
+        System.out.println("----------------------");
+        // Se construye el grafo.
+        g.addVertex(1);
+        g.addVertex(2);
+        g.addVertex(3);
+        g.addVertex(4);
+        g.addVertex(5);
+        g.addVertex(6);
+        g.addEdge(1, 2);
+        g.addEdge(3, 4);
+        g.addEdge(1, 5);
+        g.addEdge(5, 6);
+        g.addEdge(6, 4);
+        // Se construye el camino esperado.
+        List<Integer> expectedPath = new ArrayList<>();
+        expectedPath.add(1);
+        expectedPath.add(5);
+        expectedPath.add(6);
+        expectedPath.add(4);
+        System.out.println(g.toString());
+        System.out.println(g.onePath(1, 4));
+        //Se comprueba si el camino devuelto es igual al esperado.
+        assertEquals(expectedPath, g.onePath(1, 4));
     }
 
 }
