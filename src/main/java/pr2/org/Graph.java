@@ -31,7 +31,7 @@ public class Graph<V> {
     /******************************************************************
     * Añade el vértice ‘v‘ al grafo.
     * Complejidad temporal: O(1) constante - Solo se ejecuta una vez si se cumple la condición if
-    * Complejidad espacial: O(1) constante - Solo necesito saber mi vertice
+    * Complejidad espacial: O(n) lineal - Al añadir un vértice primero tengo que ver si ya existe
     *
     * @param v vértice a añadir.
     * @return ‘true‘ si no estaba anteriormente y ‘false‘ en caso
@@ -50,7 +50,7 @@ public class Graph<V> {
     * Añade un arco entre los vértices ‘v1‘ y ‘v2‘ al grafo. 
     * Se trata de un grafo bidireccional
     * Complejidad temporal: O(1) constante - Solo se ejecuta una vez si se cumple la condición if
-    * Complejidad espacial: O(2) = O(1) constante 
+    * Complejidad espacial: O(n) lineal - Hay que comprobar si ya están unidos los vértices
     *
     * @param v1 el origen del arco.
     * @param v2 el destino del arco.
@@ -72,7 +72,7 @@ public class Graph<V> {
     /******************************************************************
     * Obtiene el conjunto de vértices adyacentes a ‘v‘.
     * Complejidad temporal: O(1) constante 
-    * Complejidad espacial: O(n) lineal - Se necesita espacio para guardar los datos de la lista de adyacencia
+    * Complejidad espacial: O(n) lineal - Se necesita espacio para guardar n datos en la lista de adyacencia
     *
     * @param v vértice del que se obtienen los adyacentes.
     * @return conjunto de vértices adyacentes.
@@ -98,7 +98,7 @@ public class Graph<V> {
     
     /******************************************************************
     * Método ‘toString()‘ reescrito para la clase ‘Grafo.java‘.
-    * Complejidad temporal: O(n)*O(n) = O(n^2) cuadrática - Se ejecuta n veces el primer bucle for, y n veces el segundo bucle
+    * Complejidad temporal: O(n)*O(n) = O(n^2) cuadrática - Se ejecuta n veces el primer bucle for, y n veces el segundo bucle for
     * Complejidad espacial: O(1) constante - Solo necesito guardar el resultado
     *
     * @return una cadena de caracteres con la lista de adyacencia
