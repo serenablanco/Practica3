@@ -1,13 +1,22 @@
+/*Copyright [2021] [Serena Blanco García]
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software 
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.*/
+
 package pr2.org;
 
-import java.security.Key;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
@@ -21,6 +30,8 @@ public class Graph<V> {
 
     /******************************************************************
     * Añade el vértice ‘v‘ al grafo.
+    * Complejidad temporal: O(1) constante - Solo se ejecuta una vez si se cumple la condición if
+    * Complejidad espacial: O(1) constante - Solo necesito saber mi vertice
     *
     * @param v vértice a añadir.
     * @return ‘true‘ si no estaba anteriormente y ‘false‘ en caso
@@ -37,6 +48,9 @@ public class Graph<V> {
 
     /******************************************************************
     * Añade un arco entre los vértices ‘v1‘ y ‘v2‘ al grafo. 
+    * Se trata de un grafo bidireccional
+    * Complejidad temporal: O(1) constante - Solo se ejecuta una vez si se cumple la condición if
+    * Complejidad espacial: O(2) = O(1) constante 
     *
     * @param v1 el origen del arco.
     * @param v2 el destino del arco.
@@ -57,6 +71,8 @@ public class Graph<V> {
     
     /******************************************************************
     * Obtiene el conjunto de vértices adyacentes a ‘v‘.
+    * Complejidad temporal: O(1) constante 
+    * Complejidad espacial: O(n) lineal - Se necesita espacio para guardar los datos de la lista de adyacencia
     *
     * @param v vértice del que se obtienen los adyacentes.
     * @return conjunto de vértices adyacentes.
@@ -68,6 +84,8 @@ public class Graph<V> {
     
     /******************************************************************
     * Comprueba si el grafo contiene el vértice dado.
+    * Complejidad temporal: O(1) constante 
+    * Complejidad espacial: O(n) lineal - Se recorre la lista de adyacencia para comparar los vértices
     *
     * @param v vértice para el que se realiza la comprobación.
     * @return ‘true‘ si ‘v‘ es un vértice del grafo.
@@ -80,6 +98,9 @@ public class Graph<V> {
     
     /******************************************************************
     * Método ‘toString()‘ reescrito para la clase ‘Grafo.java‘.
+    * Complejidad temporal: O(n)*O(n) = O(n^2) cuadrática - Se ejecuta n veces el primer bucle for, y n veces el segundo bucle
+    * Complejidad espacial: O(1) constante - Solo necesito guardar el resultado
+    *
     * @return una cadena de caracteres con la lista de adyacencia
      .
     ******************************************************************/
@@ -98,6 +119,8 @@ public class Graph<V> {
 
     /******************************************************************
     * Obtiene, en caso de que exista, un camino entre ‘v1‘ y ‘v2‘. En caso contrario, devuelve ‘null‘.
+    * Complejidad temporal: O(n) lineal
+    * Complejidad espacial: O(n) lineal 
     *
     * @param v1 el vértice origen.
     * @param v2 el vértice destino.
