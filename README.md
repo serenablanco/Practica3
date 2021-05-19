@@ -2,7 +2,6 @@
 
 El propósito de este proyecto es obtener un camino en un grafo de un vértice v1 o otro v2.
 
-<img src="grafo.png" alt="Grafo"/>
 
 ### Pre-requisitos ###
 
