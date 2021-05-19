@@ -34,17 +34,29 @@ public class GraphTest {
         this.g = new Graph<Integer>();
     }
 
+    /**
+     * Comprueba que el grafo existe
+     * 
+     */
     @Test
     public void graphExists() {
         assertNotNull(this.miGrafoDeStrings);
     }
 
+    /**
+     * Comprueba que se pueden añadir vértices al grafo
+     * 
+     */
     @Test
     public void addVertexOk() {
         boolean result = this.miGrafoDeStrings.addVertex("v1");
         assertTrue(result);
     }
 
+    /**
+     * Se asegura de que no se pueden añadir vértices repetidos
+     * 
+     */
     @Test
     public void addVertexFail() {
         boolean result1 = this.miGrafoDeStrings.addVertex("v1");
@@ -53,6 +65,10 @@ public class GraphTest {
         assertFalse(result2);
     }
 
+    /**
+     * Confirma que se puede crear un 'arco' entre dos vértices
+     * 
+     */
     @Test
     public void addEdgeOk(){
         this.miGrafoDeStrings.addVertex("v1");
@@ -61,6 +77,10 @@ public class GraphTest {
         assertTrue(result);
     }
 
+    /**
+     * Comprueba que si uno de los dos vértices no existe, no se pueden unir
+     * 
+     */
     @Test
     public void addEdgeFail1(){
         this.miGrafoDeStrings.addVertex("v1");
@@ -68,12 +88,21 @@ public class GraphTest {
         assertFalse(result);
     }
 
+    /**
+     * Compruba que si ninguno de los vértces existe, no se puede crear una conexión entre ellos
+     * 
+     */
     @Test
     public void addEdgeFail2(){
         boolean result = this.miGrafoDeStrings.addEdge("v1", "v2");
         assertFalse(result);
     }
 
+    /**
+     * Comprueba que si solo hay un vértice en el grafo, su lista de adyacencia está vacía 
+     * 
+     * @throws Exception
+     */
     @Test
     public void obtainAdjacentsOk1() throws Exception{
         this.miGrafoDeStrings.addVertex("v1");
@@ -81,6 +110,11 @@ public class GraphTest {
         assertTrue(result);
     }
 
+    /**
+     * Comprueba que si existen v1 y v2, y están unidos, están en la lista de adyacencia del otro
+     * 
+     * @throws Exception
+     */
     @Test
     public void obtainAdjacentsOk2() throws Exception{
         this.miGrafoDeStrings.addVertex("v1");
@@ -90,12 +124,22 @@ public class GraphTest {
         assertTrue(result);
     }
 
+    /**
+     * Comprueba que si no hay ningún vértice, no se puede obtener una lista de adyacencia
+     * 
+     * @throws Exception
+     */
     @Test
     public void obtainAdjacentsFail1() throws Exception{
         boolean result = this.miGrafoDeStrings.obtainAdjacents("v1") != null;
         assertFalse(result);  //Usar assertNotNull?
     }
     
+    /**
+     * Comprueba que si existen dos vértices, pero no están conectados, no están en las listas de adyacencia del otro
+     * 
+     * @throws Exception
+     */
     @Test
     public void obtainAdjacentsFail2() throws Exception{
         this.miGrafoDeStrings.addVertex("v1");
@@ -104,6 +148,10 @@ public class GraphTest {
         assertFalse(result);
     }
 
+    /**
+     * Comprueba que si añadimos un vértice, el grafo contiene a dicho vértice 
+     * 
+     */
     @Test
     public void containsVertexOk(){
         this.miGrafoDeStrings.addVertex("v1");
@@ -111,6 +159,10 @@ public class GraphTest {
         assertTrue(result);
     }
 
+    /**
+     * Comprueba que el grafo no contiene ningún vértice al menos que lo hayamos añadido
+     * 
+     */
     @Test
     public void containsVertexFail(){
         boolean result = this.miGrafoDeStrings.containsVertex("v1");
